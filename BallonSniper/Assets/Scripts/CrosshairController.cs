@@ -2,15 +2,15 @@
 
 public class CrosshairController : MonoBehaviour
 {
-	[SerializeField] private GameObject _downField = null;
+	[SerializeField] private GameObject _bottomField = null;
 
 	private Vector2 _screenBounds;
 	private float _crosshairWidth;
-	private float _crosshairHeight;	
+	private float _crosshairHeight;
 
 	private void Start()
-	{		
-		_screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));		
+	{
+		_screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 		_crosshairWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x - 0.2f;
 		_crosshairHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y;
 	}
@@ -42,7 +42,7 @@ public class CrosshairController : MonoBehaviour
 	{
 		Vector3 crosshairPosition = transform.position;
 		crosshairPosition.x = Mathf.Clamp(crosshairPosition.x, _screenBounds.x * -1 + _crosshairWidth, _screenBounds.x - _crosshairWidth);
-		crosshairPosition.y = Mathf.Clamp(crosshairPosition.y, _downField.transform.position.y + _crosshairHeight, _screenBounds.y - _crosshairHeight);
+		crosshairPosition.y = Mathf.Clamp(crosshairPosition.y, _bottomField.transform.position.y + _crosshairHeight, _screenBounds.y - _crosshairHeight);
 		transform.position = crosshairPosition;
 	}
 }
