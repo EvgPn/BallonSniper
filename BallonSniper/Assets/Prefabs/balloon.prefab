@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3017579070606829567}
   - component: {fileID: 3017579070606829564}
+  - component: {fileID: -8201207402623672393}
+  - component: {fileID: 5602968964336451435}
   m_Layer: 0
   m_Name: balloon
   m_TagString: Untagged
@@ -81,3 +83,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &-8201207402623672393
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3017579070606829565}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.85333335
+--- !u!114 &5602968964336451435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3017579070606829565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d40bf8fc7d7b2418cf20f7ce0ecb60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

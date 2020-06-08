@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-public class BalloonSpawner : MonoBehaviour
+public class SpawnOptionsScript : MonoBehaviour
 {
 	[SerializeField] private GameObject _bottomField = null;
 	[SerializeField] private GameObject _balloonPrefab = null;
@@ -10,10 +11,15 @@ public class BalloonSpawner : MonoBehaviour
 	private float _minYSpawnPos;
 	private float _maxYSpawnPos;
 
-	private void Start()
+	private List<Color> _balloonsColors = new List<Color>();
+
+	int balloonCounter = 0;
+
+	private void Awake()
 	{
+		_balloonsColors = _bottomField.GetComponentInChildren<PalleteCollorsCreator>().GetColorsFromPalletes;
+
 		SetSpawnPointsLimits();
-		SpawnBallon();
 	}
 
 	private void SetSpawnPointsLimits()
@@ -28,17 +34,27 @@ public class BalloonSpawner : MonoBehaviour
 		_minYSpawnPos = _bottomField.transform.position.y + _balloonPrefab.GetComponent<SpriteRenderer>().bounds.extents.y;
 	}
 
-	private void SpawnBallon()
+	public GameObject SpawnBallon()
 	{
 		Vector2 position = ChooseRandomPosition();
-		Instantiate(_balloonPrefab, position, Quaternion.identity);
+		GameObject balloon = Instantiate(_balloonPrefab, position, Quaternion.identity);
+		balloon.GetComponent<SpriteRenderer>().color = ChooseRadomBalloonColor();
+		balloon.name = "balloon" + balloonCounter.ToString();
+		balloonCounter++;
+		return balloon;
 	}
 
-	private Vector2 ChooseRandomPosition()
+	public Vector2 ChooseRandomPosition()
 	{
 		Vector2 position = new Vector2();
 		position.x = Random.Range(_minXSpawnPos, _maxXSpawnPos);
 		position.y = Random.Range(_minYSpawnPos, _maxYSpawnPos);
 		return position;
+	}
+
+	private Color ChooseRadomBalloonColor()
+	{
+		int indexOfBallon = Random.Range(0, _balloonsColors.Count);
+		return _balloonsColors[indexOfBallon];
 	}
 }
