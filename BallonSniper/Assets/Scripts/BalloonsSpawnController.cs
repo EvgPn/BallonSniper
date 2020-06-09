@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BalloonsSpawnController : MonoBehaviour
 {
 	[SerializeField] private SpawnOptionsScript spawnOptions = null;
-	private int _numOfFirstBalloons = 5;
+	private int _numOfBalloonsToSpawn = 5;
+	private float _intervalForSpawn = 20f;
 
 	private GameObject _spawnedBalloon;
 
 	private void Start()
 	{
-		SpawnFirstBallons();
+		StartCoroutine(SpawnCoroutine());
 	}
 
-	private void SpawnFirstBallons()
+	private void SpawnBallons()
 	{
-		for (int i = 0; i < _numOfFirstBalloons; i++)
+		for (int i = 0; i < _numOfBalloonsToSpawn; i++)
 		{
 			_spawnedBalloon = spawnOptions.SpawnBallon();
 			PreventBalloonsOverlaping();
@@ -32,5 +34,14 @@ public class BalloonsSpawnController : MonoBehaviour
 		}
 
 		balloonCollider.enabled = true;
+	}
+
+	private IEnumerator SpawnCoroutine()
+	{
+		while (true)
+		{
+			SpawnBallons();
+			yield return new WaitForSeconds(_intervalForSpawn);
+		}
 	}
 }

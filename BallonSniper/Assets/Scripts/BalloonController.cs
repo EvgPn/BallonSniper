@@ -2,7 +2,7 @@
 
 public class BalloonController : MonoBehaviour
 {
-	private const float _defaultBalloonVelocity = 2f;
+	private const float _defaultBalloonVelocity = 1f;
 	private float _balloonVelocity;
 	private Rigidbody2D _balloonRigidbody;
 

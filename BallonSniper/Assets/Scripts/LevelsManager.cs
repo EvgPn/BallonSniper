@@ -8,7 +8,7 @@ public class LevelsManager : MonoBehaviour
 
 	private void Start()
 	{
-		StartCoroutine(Wait());
+		//StartCoroutine(Wait());
 	}
 
 	private IEnumerator Wait()
