@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class ShootingScript : MonoBehaviour
 {
-	[SerializeField] private LayerMask _balloonLayerMask;
+	public delegate void ShootCallBack();
+	public static event ShootCallBack AddScore;
+
+	[SerializeField] private BalloonsCounter _balloonsCounter = null;
+	[SerializeField] private LayerMask _balloonLayerMask = new LayerMask();
 	private float _overlapCircleRadius = 0.1f;
 	private Collider2D _balloonCollider;
 
@@ -47,6 +51,8 @@ public class ShootingScript : MonoBehaviour
 		if (GetComponent<SpriteRenderer>().color == _balloonCollider.gameObject.GetComponent<SpriteRenderer>().color)
 		{
 			Destroy(_balloonCollider.gameObject);
+			_balloonsCounter.BalloonsInScene--;
+			AddScore?.Invoke();
 		}
 		else
 		{

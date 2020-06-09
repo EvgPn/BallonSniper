@@ -13,8 +13,6 @@ public class SpawnOptionsScript : MonoBehaviour
 
 	private List<Color> _balloonsColors = new List<Color>();
 
-	int balloonCounter = 0;
-
 	private void Awake()
 	{
 		_balloonsColors = _bottomField.GetComponentInChildren<PalleteCollorsCreator>().GetColorsFromPalletes;
@@ -39,8 +37,7 @@ public class SpawnOptionsScript : MonoBehaviour
 		Vector2 position = ChooseRandomPosition();
 		GameObject balloon = Instantiate(_balloonPrefab, position, Quaternion.identity);
 		balloon.GetComponent<SpriteRenderer>().color = ChooseRadomBalloonColor();
-		balloon.name = "balloon";// + balloonCounter.ToString();
-		balloonCounter++;
+		balloon.name = "balloon";
 		return balloon;
 	}
 

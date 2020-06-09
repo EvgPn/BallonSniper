@@ -3,11 +3,17 @@ using System.Collections;
 
 public class BalloonsSpawnController : MonoBehaviour
 {
+	[SerializeField] private BalloonsCounter _balloonsCounter = null;
 	[SerializeField] private SpawnOptionsScript spawnOptions = null;
 	private int _numOfBalloonsToSpawn = 5;
-	private float _intervalForSpawn = 20f;
+	public float _intervalForSpawn = 20f;
 
 	private GameObject _spawnedBalloon;
+
+	private void OnEnable()
+	{
+		LevelsManager.ChangeSpawnInterval += SetNewSpawnInterval;
+	}
 
 	private void Start()
 	{
@@ -19,6 +25,7 @@ public class BalloonsSpawnController : MonoBehaviour
 		for (int i = 0; i < _numOfBalloonsToSpawn; i++)
 		{
 			_spawnedBalloon = spawnOptions.SpawnBallon();
+			_balloonsCounter.BalloonsInScene++;
 			PreventBalloonsOverlaping();
 		}
 	}
@@ -43,5 +50,10 @@ public class BalloonsSpawnController : MonoBehaviour
 			SpawnBallons();
 			yield return new WaitForSeconds(_intervalForSpawn);
 		}
+	}
+
+	private void SetNewSpawnInterval(float newInterval)
+	{
+		_intervalForSpawn = newInterval;
 	}
 }
