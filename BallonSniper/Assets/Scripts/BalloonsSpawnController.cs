@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BalloonsSpawnController : MonoBehaviour
 {
-	[SerializeField] private SpawnOptionsScript spawnOptions = null;	
+	[SerializeField] private SpawnOptionsScript spawnOptions = null;
 	private int _numOfFirstBalloons = 5;
 
 	private GameObject _spawnedBalloon;
@@ -13,7 +11,7 @@ public class BalloonsSpawnController : MonoBehaviour
 	{
 		SpawnFirstBallons();
 	}
-	
+
 	private void SpawnFirstBallons()
 	{
 		for (int i = 0; i < _numOfFirstBalloons; i++)
