@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
 public class BalloonController : MonoBehaviour
-{
-	private const float _defaultBalloonVelocity = 2f;
+{	
 	public float _balloonVelocity;
 	private Rigidbody2D _balloonRigidbody;
 
@@ -15,8 +14,8 @@ public class BalloonController : MonoBehaviour
 	}
 
 	private void Start()
-	{
-		_balloonVelocity = _defaultBalloonVelocity;
+	{		
+		_balloonVelocity = LevelsManager._defaultBallonVelocity;
 		_balloonRigidbody = GetComponent<Rigidbody2D>();
 		SetStartBalloonVelocity();
 	}
@@ -40,6 +39,6 @@ public class BalloonController : MonoBehaviour
 
 	private void SetNewVelocity(float velocity)
 	{
-		_balloonVelocity = _defaultBalloonVelocity * velocity;
+		_balloonVelocity = velocity;		
 	}
 }
