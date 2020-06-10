@@ -30,9 +30,14 @@ public class CrosshairController : MonoBehaviour
 
 			if (touch.phase == TouchPhase.Moved)
 			{
-				if (GetComponent<Collider2D>() == Physics2D.OverlapPoint(touchPos))
+				Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+				RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+
+				if (GetComponent<Collider2D>() == hit.collider)
 				{
-					transform.position = new Vector2(touchPos.x, touchPos.y);
+					transform.position = new Vector3(touchPos.x, touchPos.y, -3f);
 				}
 			}
 		}

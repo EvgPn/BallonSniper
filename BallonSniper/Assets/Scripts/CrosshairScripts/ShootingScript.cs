@@ -9,8 +9,6 @@ public class ShootingScript : MonoBehaviour
 	[SerializeField] private GameObject _poppingVFX = null;
 	[SerializeField] private BalloonsCounter _balloonsCounter = null;
 	[SerializeField] private LayerMask _balloonLayerMask = new LayerMask();
-	private float _overlapCircleRadius = 0.1f;
-	private Collider2D _balloonCollider;
 
 	private void Update()
 	{
@@ -19,19 +17,19 @@ public class ShootingScript : MonoBehaviour
 
 	private void ShootOnTouch()
 	{
-		if (Input.touchCount > 0)
+		if (Input.GetMouseButtonDown(0))
 		{
-			Touch touch = Input.GetTouch(0);
-			Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-			CheckTouchOnCrosshair(touch, touchPos);
+			RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
+			CheckTouchOnCrosshair(hit);
 		}
-
 	}
 
-	private void CheckTouchOnCrosshair(Touch touch, Vector2 touchPos)
+	private void CheckTouchOnCrosshair(RaycastHit2D hit)
 	{
-		if (touch.phase == TouchPhase.Began && GetComponent<Collider2D>() == Physics2D.OverlapCircle(touchPos, _overlapCircleRadius))
+		if (hit.collider != null && hit.collider == GetComponent<Collider2D>())
 		{
 			CheckBalloonUnderCrosshair();
 		}
@@ -39,25 +37,24 @@ public class ShootingScript : MonoBehaviour
 
 	private void CheckBalloonUnderCrosshair()
 	{
-		_balloonCollider = Physics2D.OverlapCircle(transform.position, _overlapCircleRadius, _balloonLayerMask.value);
-
-		if (_balloonCollider != null && _balloonCollider.gameObject.name == "balloon")
+		RaycastHit2D hitFromCrosshair = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.zero, 5f, _balloonLayerMask);
+		if (hitFromCrosshair.collider != null && hitFromCrosshair.collider.gameObject.name == "balloon")
 		{
-			MakeShoot();
+			MakeShoot(hitFromCrosshair);
 		}
 	}
 
-	private void MakeShoot()
+	private void MakeShoot(RaycastHit2D hitFromCrosshair)
 	{
-		if (GetComponent<SpriteRenderer>().color == _balloonCollider.gameObject.GetComponent<SpriteRenderer>().color)
+		if (GetComponent<SpriteRenderer>().color == hitFromCrosshair.collider.gameObject.GetComponent<SpriteRenderer>().color)
 		{
 			AddScore?.Invoke();
-			GameObject popVFX = Instantiate(_poppingVFX, _balloonCollider.transform.position, Quaternion.identity);
+			GameObject popVFX = Instantiate(_poppingVFX, hitFromCrosshair.collider.gameObject.transform.position, Quaternion.identity);
 			popVFX.GetComponent<ParticleSystem>().startColor = GetComponent<SpriteRenderer>().color;
 			Destroy(popVFX, 0.5f);
 
-			Destroy(_balloonCollider.gameObject);
-			_balloonsCounter.BalloonsInScene--;			
+			Destroy(hitFromCrosshair.collider.gameObject);
+			_balloonsCounter.BalloonsInScene--;
 		}
 		else
 		{
