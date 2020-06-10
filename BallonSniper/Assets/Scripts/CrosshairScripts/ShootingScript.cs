@@ -6,6 +6,7 @@ public class ShootingScript : MonoBehaviour
 	public delegate void ShootCallBack();
 	public static event ShootCallBack AddScore;
 
+	[SerializeField] private GameObject _poppingVFX = null;
 	[SerializeField] private BalloonsCounter _balloonsCounter = null;
 	[SerializeField] private LayerMask _balloonLayerMask = new LayerMask();
 	private float _overlapCircleRadius = 0.1f;
@@ -50,9 +51,13 @@ public class ShootingScript : MonoBehaviour
 	{
 		if (GetComponent<SpriteRenderer>().color == _balloonCollider.gameObject.GetComponent<SpriteRenderer>().color)
 		{
-			Destroy(_balloonCollider.gameObject);
-			_balloonsCounter.BalloonsInScene--;
 			AddScore?.Invoke();
+			GameObject popVFX = Instantiate(_poppingVFX, _balloonCollider.transform.position, Quaternion.identity);
+			popVFX.GetComponent<ParticleSystem>().startColor = GetComponent<SpriteRenderer>().color;
+			Destroy(popVFX, 0.5f);
+
+			Destroy(_balloonCollider.gameObject);
+			_balloonsCounter.BalloonsInScene--;			
 		}
 		else
 		{
