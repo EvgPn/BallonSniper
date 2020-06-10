@@ -6,7 +6,7 @@ public class BalloonsSpawnController : MonoBehaviour
 	[SerializeField] private BalloonsCounter _balloonsCounter = null;
 	[SerializeField] private SpawnOptionsScript spawnOptions = null;
 	private int _numOfBalloonsToSpawn = 5;
-	public float _intervalForSpawn = 20f;
+	public float _intervalForSpawn = 5f;
 
 	private GameObject _spawnedBalloon;
 

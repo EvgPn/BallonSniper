@@ -40,14 +40,14 @@ public class LevelsManager : MonoBehaviour
 			_defaultBallonVelocity = _valueForVelocityOfOldBallonos * 2f;
 			StartCoroutine(ShowNextLevelText());
 			ChangeBalloonsVelocity?.Invoke(_valueForVelocityOfOldBallonos * 2f);
-			ChangeSpawnInterval?.Invoke(30f);
+			ChangeSpawnInterval?.Invoke(10f);
 		}
 		else if (_score == 3000)
 		{
 			_defaultBallonVelocity = _valueForVelocityOfOldBallonos * 3f;
 			StartCoroutine(ShowNextLevelText());
 			ChangeBalloonsVelocity?.Invoke(_valueForVelocityOfOldBallonos * 3f);
-			ChangeSpawnInterval?.Invoke(40f);
+			ChangeSpawnInterval?.Invoke(15f);
 		}
 	}
 

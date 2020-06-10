@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _balloonsCounter: {fileID: 627710907}
   spawnOptions: {fileID: 1446062999}
-  _intervalForSpawn: 20
+  _intervalForSpawn: 5
 --- !u!1 &1767493930
 GameObject:
   m_ObjectHideFlags: 0
