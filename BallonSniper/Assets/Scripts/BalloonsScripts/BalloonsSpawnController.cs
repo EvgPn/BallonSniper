@@ -24,6 +24,7 @@ public class BalloonsSpawnController : MonoBehaviour
 	{
 		for (int i = 0; i < _numOfBalloonsToSpawn; i++)
 		{
+			if (_balloonsCounter.BalloonsInScene == _balloonsCounter._maxAmountOfBalloons) break;
 			_spawnedBalloon = spawnOptions.SpawnBallon();
 			_balloonsCounter.BalloonsInScene++;
 			PreventBalloonsOverlaping();

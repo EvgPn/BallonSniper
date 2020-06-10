@@ -7,7 +7,7 @@ public class BalloonsCounter : MonoBehaviour
 	[SerializeField] private Text _score = null;
 
 	public int BalloonsInScene = 0;
-	private int _maxAmountOfBalloons = 35;
+	public int _maxAmountOfBalloons = 34;
 
 	private void Update()
 	{

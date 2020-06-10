@@ -75,6 +75,7 @@ public class ShootingScript : MonoBehaviour
 			duration -= blinkTime;
 		}
 
+		GetComponent<SpriteRenderer>().enabled = true;
 		gameObject.SetActive(false);
 	}
 }
