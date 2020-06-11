@@ -8,7 +8,7 @@ public class LevelsManager : MonoBehaviour
 	public static event ChangeLevelParametrsCallBack ChangeBalloonsVelocity;
 	public static event ChangeLevelParametrsCallBack ChangeSpawnInterval;
 
-	public static float _defaultBallonVelocity = 3f;
+	public static float _defaultBallonVelocity = 2f;
 	public static float _valueForVelocityOfOldBallonos;
 
 	[SerializeField] private Text _nextLevelText = null;
@@ -20,9 +20,15 @@ public class LevelsManager : MonoBehaviour
 		ShootingScript.AddScore += ChangeScore;
 	}
 
-	private void Start()
+	private void OnDisable()
 	{
+		ShootingScript.AddScore -= ChangeScore;
+	}
+
+	private void Start()
+	{		
 		_nextLevelText.enabled = false;
+		_defaultBallonVelocity = 2f;
 		_valueForVelocityOfOldBallonos = _defaultBallonVelocity;
 	}
 

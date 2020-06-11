@@ -15,6 +15,11 @@ public class BalloonsSpawnController : MonoBehaviour
 		LevelsManager.ChangeSpawnInterval += SetNewSpawnInterval;
 	}
 
+	private void OnDisable()
+	{
+		LevelsManager.ChangeSpawnInterval -= SetNewSpawnInterval;
+	}
+
 	private void Start()
 	{
 		StartCoroutine(SpawnCoroutine());
